@@ -2,6 +2,7 @@
 
 package com.m3u.data.parser
 
+import com.m3u.data.parser.internal.EpgParserImpl
 import com.m3u.data.parser.internal.M3UParserImpl
 import com.m3u.data.parser.internal.XtreamParserImpl
 import dagger.Binds
@@ -17,4 +18,7 @@ internal interface ParserModule {
 
     @Binds
     fun bindXtreamParser(parser: XtreamParserImpl): XtreamParser
+
+    @Binds
+    fun bindEpgParser(parser: EpgParserImpl): EpgParser
 }
