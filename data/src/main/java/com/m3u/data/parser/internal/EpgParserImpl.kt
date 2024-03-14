@@ -184,7 +184,6 @@ class EpgParserImpl @Inject constructor(
 
     private inline fun optional(block: () -> String): String? =
         runCatching { block() }
-            .onSuccess { logger.log("success") }
             .onFailure { logger.log(it) }
             .getOrNull()
 }
