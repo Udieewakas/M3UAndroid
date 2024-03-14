@@ -416,12 +416,6 @@ private fun M3UInputContent(
                     onValueChange = onUrl,
                     modifier = Modifier.fillMaxWidth()
                 )
-                PlaceholderField(
-                    text = epg,
-                    placeholder = stringResource(string.feat_setting_placeholder_epg).uppercase(),
-                    onValueChange = onEpg,
-                    modifier = Modifier.fillMaxWidth()
-                )
             } else {
                 LocalStorageButton(
                     uri = uri,
@@ -430,6 +424,13 @@ private fun M3UInputContent(
                 )
             }
         }
+
+        PlaceholderField(
+            text = epg,
+            placeholder = stringResource(string.feat_setting_placeholder_epg).uppercase(),
+            onValueChange = onEpg,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
