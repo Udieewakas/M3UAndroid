@@ -44,6 +44,7 @@ data class Playlists @Inject constructor(
                 val basicUrl = call.queryParameters["address"]
                 val username = call.queryParameters["username"]
                 val password = call.queryParameters["password"]
+                val epg = call.queryParameters["epg"]
 
                 if (title == null || url == null) {
                     call.respond(
@@ -65,6 +66,7 @@ data class Playlists @Inject constructor(
                             SubscriptionWorker.INPUT_STRING_BASIC_URL to basicUrl,
                             SubscriptionWorker.INPUT_STRING_USERNAME to username,
                             SubscriptionWorker.INPUT_STRING_PASSWORD to password,
+                            SubscriptionWorker.INPUT_STRING_EPG to epg,
                             SubscriptionWorker.INPUT_STRING_DATA_SOURCE_VALUE to dataSource.value
                         )
                     )

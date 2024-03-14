@@ -67,6 +67,7 @@ class PlaylistRepositoryImpl @Inject constructor(
     override suspend fun m3u(
         title: String,
         url: String,
+        epg: String?,
         callback: (count: Int, total: Int) -> Unit
     ) {
         suspend fun parse(
@@ -107,7 +108,7 @@ class PlaylistRepositoryImpl @Inject constructor(
                 currentCount += streams.size
                 callback(currentCount, -1)
 
-                val playlist = Playlist(title, actualUrl)
+                val playlist = Playlist(title, actualUrl, epg = epg)
                 playlistDao.insertOrReplace(playlist)
 
                 streamDao.compareAndUpdate(
@@ -272,8 +273,9 @@ class PlaylistRepositoryImpl @Inject constructor(
                     .setInputData(
                         workDataOf(
                             SubscriptionWorker.INPUT_STRING_TITLE to playlist.title,
-                            SubscriptionWorker.INPUT_STRING_URL to url,
-                            SubscriptionWorker.INPUT_STRING_DATA_SOURCE_VALUE to DataSource.M3U.value
+                            SubscriptionWorker.INPUT_STRING_URL to playlist.url,
+                            SubscriptionWorker.INPUT_STRING_EPG to playlist.epg,
+                            SubscriptionWorker.INPUT_STRING_DATA_SOURCE_VALUE to playlist.source.value
                         )
                     )
                     .addTag(url)
@@ -296,11 +298,11 @@ class PlaylistRepositoryImpl @Inject constructor(
                     .setInputData(
                         workDataOf(
                             SubscriptionWorker.INPUT_STRING_TITLE to playlist.title,
-                            SubscriptionWorker.INPUT_STRING_URL to url,
+                            SubscriptionWorker.INPUT_STRING_URL to playlist.url,
                             SubscriptionWorker.INPUT_STRING_BASIC_URL to input.basicUrl,
                             SubscriptionWorker.INPUT_STRING_USERNAME to input.username,
                             SubscriptionWorker.INPUT_STRING_PASSWORD to input.password,
-                            SubscriptionWorker.INPUT_STRING_DATA_SOURCE_VALUE to DataSource.Xtream.value
+                            SubscriptionWorker.INPUT_STRING_DATA_SOURCE_VALUE to playlist.source.value
                         )
                     )
                     .addTag(url)

@@ -39,7 +39,9 @@ data class Playlist(
     @Serializable(with = DataSourceSerializer::class)
     val source: DataSource = DataSource.M3U,
     @ColumnInfo(name = "user_agent", defaultValue = "NULL")
-    val userAgent: String? = null
+    val userAgent: String? = null,
+    @ColumnInfo(name = "epg", defaultValue = "NULL")
+    val epg: String? = null
 ) : Likable<Playlist> {
     val fromLocal: Boolean
         get() {
@@ -64,7 +66,7 @@ data class Playlist(
         }
 
     override fun like(another: Playlist): Boolean {
-        return title == another.title && url == another.url
+        return title == another.title && url == another.url && epg == another.epg
     }
 
     companion object {

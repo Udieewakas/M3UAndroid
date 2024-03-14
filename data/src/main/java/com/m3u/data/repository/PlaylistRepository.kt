@@ -15,6 +15,7 @@ interface PlaylistRepository {
     suspend fun m3u(
         title: String,
         url: String,
+        epg: String?,
         callback: (count: Int, total: Int) -> Unit = { _, _ -> }
     )
 

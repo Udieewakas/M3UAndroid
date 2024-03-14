@@ -196,6 +196,7 @@ class SettingViewModel @Inject constructor(
                     basicUrl,
                     username,
                     password,
+                    epg,
                     selected
                 )
             }
@@ -212,6 +213,7 @@ class SettingViewModel @Inject constructor(
                     SubscriptionWorker.INPUT_STRING_BASIC_URL to basicUrl,
                     SubscriptionWorker.INPUT_STRING_USERNAME to username,
                     SubscriptionWorker.INPUT_STRING_PASSWORD to password,
+                    SubscriptionWorker.INPUT_STRING_EPG to epg,
                     SubscriptionWorker.INPUT_STRING_DATA_SOURCE_VALUE to selected.value
                 )
             )
@@ -309,6 +311,7 @@ class SettingViewModel @Inject constructor(
         basicUrl = ""
         username = ""
         password = ""
+        epg = ""
     }
 
     internal var forTv by mutableStateOf(false)
@@ -316,4 +319,5 @@ class SettingViewModel @Inject constructor(
     internal var basicUrl by mutableStateOf("")
     internal var username by mutableStateOf("")
     internal var password by mutableStateOf("")
+    internal var epg by mutableStateOf("")
 }

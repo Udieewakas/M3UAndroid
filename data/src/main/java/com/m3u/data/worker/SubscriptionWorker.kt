@@ -37,6 +37,7 @@ class SubscriptionWorker @AssistedInject constructor(
     private val basicUrl = inputData.getString(INPUT_STRING_BASIC_URL)
     private val username = inputData.getString(INPUT_STRING_USERNAME)
     private val password = inputData.getString(INPUT_STRING_PASSWORD)
+    private val epg = inputData.getString(INPUT_STRING_EPG)
     private val url = inputData.getString(INPUT_STRING_URL)
 
     override suspend fun doWork(): Result = coroutineScope {
@@ -55,6 +56,7 @@ class SubscriptionWorker @AssistedInject constructor(
                         playlistRepository.m3u(
                             title = title,
                             url = url,
+                            epg = epg,
                             callback = { count, total ->
                                 val notification = createNotification()
                                     .setContentText("[$count/${total.takeIf { it != -1 } ?: "~"}] Downloading...")
@@ -151,6 +153,7 @@ class SubscriptionWorker @AssistedInject constructor(
         const val INPUT_STRING_BASIC_URL = "basic_url"
         const val INPUT_STRING_USERNAME = "username"
         const val INPUT_STRING_PASSWORD = "password"
+        const val INPUT_STRING_EPG = "epg"
         const val INPUT_STRING_DATA_SOURCE_VALUE = "data-source"
         const val TAG = "subscription"
     }

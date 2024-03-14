@@ -149,6 +149,8 @@ fun SettingRoute(
             onUsername = { viewModel.username = it },
             password = viewModel.password,
             onPassword = { viewModel.password = it },
+            epg = viewModel.epg,
+            onEpg = { viewModel.epg = it },
             modifier = modifier.fillMaxSize()
         )
         if (!tv) {
@@ -200,6 +202,8 @@ private fun SettingScreen(
     onUsername: (String) -> Unit,
     password: String,
     onPassword: (String) -> Unit,
+    epg: String,
+    onEpg: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val helper = LocalHelper.current
@@ -313,6 +317,8 @@ private fun SettingScreen(
                                 onUsername = onUsername,
                                 password = password,
                                 onPassword = onPassword,
+                                epg = epg,
+                                onEpg = onEpg,
                                 modifier = Modifier.fillMaxSize()
                             )
                         }

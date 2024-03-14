@@ -91,6 +91,8 @@ internal fun SubscriptionsFragment(
     openDocument: (Uri) -> Unit,
     backup: () -> Unit,
     restore: () -> Unit,
+    epg: String,
+    onEpg: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val spacing = LocalSpacing.current
@@ -128,7 +130,9 @@ internal fun SubscriptionsFragment(
                         onSubscribeForTv = onSubscribeForTv,
                         openDocument = openDocument,
                         backup = backup,
-                        restore = restore
+                        restore = restore,
+                        epg = epg,
+                        onEpg = onEpg
                     )
                 }
 
@@ -175,6 +179,8 @@ private fun MainContentImpl(
     backingUpOrRestoring: BackingUpAndRestoringState,
     onTitle: (String) -> Unit,
     onUrl: (String) -> Unit,
+    epg: String,
+    onEpg: (String) -> Unit,
     onClipboard: (String) -> Unit,
     onSubscribe: () -> Unit,
     onLocalStorage: (Boolean) -> Unit,
@@ -218,6 +224,8 @@ private fun MainContentImpl(
                         onTitle = onTitle,
                         url = url,
                         onUrl = onUrl,
+                        epg = epg,
+                        onEpg = onEpg,
                         uri = uri,
                         openDocument = openDocument,
                         localStorage = localStorage
@@ -380,6 +388,8 @@ private fun M3UInputContent(
     url: String,
     onUrl: (String) -> Unit,
     uri: Uri,
+    epg: String,
+    onEpg: (String) -> Unit,
     openDocument: (Uri) -> Unit,
     localStorage: Boolean,
     modifier: Modifier = Modifier
@@ -404,6 +414,12 @@ private fun M3UInputContent(
                     text = url,
                     placeholder = stringResource(string.feat_setting_placeholder_url).uppercase(),
                     onValueChange = onUrl,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                PlaceholderField(
+                    text = epg,
+                    placeholder = stringResource(string.feat_setting_placeholder_epg).uppercase(),
+                    onValueChange = onEpg,
                     modifier = Modifier.fillMaxWidth()
                 )
             } else {
